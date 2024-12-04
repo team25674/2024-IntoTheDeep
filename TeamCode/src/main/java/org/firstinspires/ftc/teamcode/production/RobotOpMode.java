@@ -164,7 +164,7 @@ public class RobotOpMode extends LinearOpMode {
             lastButtonB = gamepad2.b;
             lastButtonA = gamepad2.a;
 
-            //spy controlls
+            // Spy controls
             if (gamepad2.dpad_down) {
                 spy.down();
                 telemetry.addLine("down detected");
@@ -173,15 +173,15 @@ public class RobotOpMode extends LinearOpMode {
                 spy.up();
                 telemetry.addLine("up detected");
             }
+            // TODO: Change this to right trigger
             if (gamepad2.dpad_left) {
                 spy.intake();
                 telemetry.addLine("left detected");
-
             }
+            // TODO: Change this to left trigger
             if (gamepad2.dpad_right) {
                 spy.reject();
                 telemetry.addLine("right detected");
-
             }
             telemetry.addData("wheel1 position", wheel1.getPosition());
             telemetry.addData("wheel2 position", wheel2.getPosition());
