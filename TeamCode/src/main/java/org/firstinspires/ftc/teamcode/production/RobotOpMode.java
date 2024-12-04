@@ -146,12 +146,14 @@ public class RobotOpMode extends LinearOpMode {
                 verticalLinearSlide.goToPosition(0);
             }
 
+            // VERTICAL LINEAR SLIDE
             if (gamepad2.right_stick_y != 0) {
                 verticalLinearSlide.extend(gamepad2.right_stick_y);// y -1.0 <> 1.0   servo takes 0-1.0, direction
             } else if (!verticalLinearSlide.motor.isBusy()) {
                 verticalLinearSlide.motor.setPower(0);
             }
 
+            // HORIZONTAL LINEAR SLIDE
             if (gamepad2.left_stick_y != 0) {
                 horizontalLinearSlide.extend(gamepad2.left_stick_y);
             } else if (!horizontalLinearSlide.motor.isBusy()) {
@@ -170,7 +172,6 @@ public class RobotOpMode extends LinearOpMode {
             if (gamepad2.dpad_up) {
                 spy.up();
                 telemetry.addLine("up detected");
-
             }
             if (gamepad2.dpad_left) {
                 spy.intake();
