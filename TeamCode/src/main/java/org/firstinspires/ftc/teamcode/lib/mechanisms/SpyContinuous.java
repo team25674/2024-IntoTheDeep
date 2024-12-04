@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.lib.mechanisms;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class Spy {
+public class SpyContinuous {
     private final double UP_POSITION = 1;
     private final double DOWN_POSTION = .43;
     private final double REJECT_POSITION_WHEEL1 = .1;
@@ -14,13 +14,13 @@ public class Spy {
     private Servo wheel2;
     private Servo upAndDown;
 
-    public Spy (Servo wheel1, Servo wheel2, Servo upAndDown){
+    public SpyContinuous(Servo wheel1, Servo wheel2, Servo upAndDown){
         this.wheel1 = wheel1;
         this.wheel2 = wheel2;
         this.upAndDown = upAndDown;
     }
     public void intake() {
-        wheel1.setPosition(INTAKE_POSITION_WHEEL1);
+        wheel1.setPosition(INTAKE_POSITION_WHEEL1); //rightsticky needs to be between 0-1 instead of -1 and 1, so divide by one??Spy
         wheel2.setPosition(INTAKE_POSITION_WHEEL2);
 
     }

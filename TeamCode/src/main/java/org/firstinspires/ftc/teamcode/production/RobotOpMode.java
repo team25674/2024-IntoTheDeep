@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
-import org.firstinspires.ftc.teamcode.lib.mechanisms.Spy;
+import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
 
 @TeleOp(name = "RobotOpMode", group = "Linear OpMode")
 public class RobotOpMode extends LinearOpMode {
@@ -26,7 +26,7 @@ public class RobotOpMode extends LinearOpMode {
     private Servo wheel1;
     private Servo wheel2;
     private Servo upAndDown;
-    private Spy spy;
+    private SpyContinuous spy;
 
     //buton states
     boolean lastButtonY = false;
@@ -63,7 +63,7 @@ public class RobotOpMode extends LinearOpMode {
         wheel1 = hardwareMap.get(Servo.class, "wheel1Servo");
         wheel2 = hardwareMap.get(Servo.class, "wheel2Servo");
         upAndDown = hardwareMap.get(Servo.class, "upAndDownServo");
-        spy = new Spy(wheel1, wheel2, upAndDown);
+        spy = new SpyContinuous(wheel1, wheel2, upAndDown);
 
 
         waitForStart();
