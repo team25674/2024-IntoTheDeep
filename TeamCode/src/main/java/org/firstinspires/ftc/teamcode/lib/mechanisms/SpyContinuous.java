@@ -5,38 +5,52 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class SpyContinuous {
     private final double UP_POSITION = 1;
     private final double DOWN_POSTION = .43;
-    private final double REJECT_POSITION_WHEEL1 = .1;
-    private final double REJECT_POSITION_WHEEL2 = .9;
-    private final double INTAKE_POSITION_WHEEL1 = .9;
-    private final double INTAKE_POSITION_WHEEL2 = .1;
+    private final double STOP_SPEED = 0;
+
 
     private Servo wheel1;
     private Servo wheel2;
     private Servo upAndDown;
 
-    public SpyContinuous(Servo wheel1, Servo wheel2, Servo upAndDown){
+    public SpyContinuous(Servo wheel1, Servo wheel2, Servo upAndDown) {
         this.wheel1 = wheel1;
         this.wheel2 = wheel2;
         this.upAndDown = upAndDown;
     }
+
     // TODO: Make this continuous
     // Hint: accept the float value from the right trigger of controller 2
-    public void intake() {
-        wheel1.setPosition(INTAKE_POSITION_WHEEL1); //rightsticky needs to be between 0-1 instead of -1 and 1, so divide by one??Spy
-        wheel2.setPosition(INTAKE_POSITION_WHEEL2);
+    public void intake(double speed) {
+        wheel1.setDirection(Servo.Direction.FORWARD); //rightsticky needs to be between 0-1 instead of -1 and 1, so divide by one??Spy
+        wheel2.setDirection(Servo.Direction.REVERSE);
+        wheel1.setPosition(speed);
+        wheel2.setPosition(speed);
+
 
     }
+
     // TODO: Make this continuous
     // Hint: accept the float value from the left trigger of controller 2
-    public void reject() {
-        wheel1.setPosition(REJECT_POSITION_WHEEL1);
-        wheel2.setPosition(REJECT_POSITION_WHEEL2);
+    public void reject(double speed) {
+        wheel1.setDirection(Servo.Direction.REVERSE);
+        wheel2.setDirection(Servo.Direction.FORWARD);
+        wheel1.setPosition(speed);
+        wheel2.setPosition(speed);
     }
+
     public void up() {
         upAndDown.setPosition(UP_POSITION);
 
     }
+
     public void down() {
         upAndDown.setPosition(DOWN_POSTION);
     }
+
+    public void stop() {
+        wheel1.setPosition(STOP_SPEED);
+        wheel1.setPosition(STOP_SPEED);
+    }
 }
+
+
