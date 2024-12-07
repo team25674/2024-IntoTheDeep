@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
-import org.firstinspires.ftc.teamcode.lib.mechanisms.Spy;
+import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
 
 @TeleOp(name = "RobotOpMode", group = "Linear OpMode")
 public class RobotOpMode extends LinearOpMode {
@@ -26,7 +26,7 @@ public class RobotOpMode extends LinearOpMode {
     private Servo wheel1;
     private Servo wheel2;
     private Servo upAndDown;
-    private Spy spy;
+    private SpyContinuous spy;
 
     //buton states
     boolean lastButtonY = false;
@@ -53,7 +53,7 @@ public class RobotOpMode extends LinearOpMode {
         telemetry.update();
 
         DcMotor verticalLinearSlideMotor = hardwareMap.get(DcMotor.class, "vlsMotor");
-        //TODO Horizontal linear slide motor needs hardware map, and vertical linear slide needs a rename on the hardware map
+
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
         //Vertical linear slide
         verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES);
@@ -63,7 +63,7 @@ public class RobotOpMode extends LinearOpMode {
         wheel1 = hardwareMap.get(Servo.class, "wheel1Servo");
         wheel2 = hardwareMap.get(Servo.class, "wheel2Servo");
         upAndDown = hardwareMap.get(Servo.class, "upAndDownServo");
-        spy = new Spy(wheel1, wheel2, upAndDown);
+        spy = new SpyContinuous(wheel1, wheel2, upAndDown);
 
 
         waitForStart();
@@ -146,12 +146,14 @@ public class RobotOpMode extends LinearOpMode {
                 verticalLinearSlide.goToPosition(0);
             }
 
+            // VERTICAL LINEAR SLIDE
             if (gamepad2.right_stick_y != 0) {
                 verticalLinearSlide.extend(gamepad2.right_stick_y);// y -1.0 <> 1.0   servo takes 0-1.0, direction
             } else if (!verticalLinearSlide.motor.isBusy()) {
                 verticalLinearSlide.motor.setPower(0);
             }
 
+            // HORIZONTAL LINEAR SLIDE
             if (gamepad2.left_stick_y != 0) {
                 horizontalLinearSlide.extend(gamepad2.left_stick_y);
             } else if (!horizontalLinearSlide.motor.isBusy()) {
@@ -162,7 +164,7 @@ public class RobotOpMode extends LinearOpMode {
             lastButtonB = gamepad2.b;
             lastButtonA = gamepad2.a;
 
-            //spy controlls
+            // Spy controls
             if (gamepad2.dpad_down) {
                 spy.down();
                 telemetry.addLine("down detected");
@@ -170,17 +172,16 @@ public class RobotOpMode extends LinearOpMode {
             if (gamepad2.dpad_up) {
                 spy.up();
                 telemetry.addLine("up detected");
-
             }
+            // TODO: Change this to right trigger
             if (gamepad2.dpad_left) {
                 spy.intake();
                 telemetry.addLine("left detected");
-
             }
+            // TODO: Change this to left trigger
             if (gamepad2.dpad_right) {
                 spy.reject();
                 telemetry.addLine("right detected");
-
             }
             telemetry.addData("wheel1 position", wheel1.getPosition());
             telemetry.addData("wheel2 position", wheel2.getPosition());
