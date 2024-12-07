@@ -49,7 +49,7 @@ public class SpyContinuous {
 
     public void stop() {
         wheel1.setPosition(STOP_SPEED);
-        wheel1.setPosition(STOP_SPEED);
+        wheel2.setPosition(STOP_SPEED);
     }
 }
 

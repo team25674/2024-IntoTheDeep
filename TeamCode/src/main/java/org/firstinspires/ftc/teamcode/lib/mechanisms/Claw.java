@@ -9,11 +9,12 @@ public class Claw {
     private final double CLOSE_POSITION_CLAWSERVO = .9;
 
     private Servo clawServo;
-    private Servo upAndDown;
+    private Servo RotateServo;
+
 
     public Claw(Servo clawServo, Servo upAndDown){
         this.clawServo = clawServo;
-        this.upAndDown = upAndDown;
+        this.RotateServo= upAndDown;
     }
     public void close() {
         clawServo.setPosition(CLOSE_POSITION_CLAWSERVO);
@@ -22,11 +23,11 @@ public class Claw {
         clawServo.setPosition(OPEN_POSITION_CLAWSERVO);
     }
     public void up() {
-        upAndDown.setPosition(GRAB_POSITION);
+        RotateServo.setPosition(GRAB_POSITION);
 
     }
     public void down() {
-        upAndDown.setPosition(BASKET_POSTION);
+        RotateServo.setPosition(BASKET_POSTION);
 
     }
 }

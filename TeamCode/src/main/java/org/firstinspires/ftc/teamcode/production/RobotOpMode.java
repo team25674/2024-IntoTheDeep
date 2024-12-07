@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
 
@@ -27,6 +28,9 @@ public class RobotOpMode extends LinearOpMode {
     private Servo wheel2;
     private Servo upAndDown;
     private SpyContinuous spy;
+    private Servo clawServo;
+    private Servo RotateServo;
+    private Claw claw;
 
     //buton states
     boolean lastButtonY = false;
@@ -64,6 +68,11 @@ public class RobotOpMode extends LinearOpMode {
         wheel2 = hardwareMap.get(Servo.class, "wheel2Servo");
         upAndDown = hardwareMap.get(Servo.class, "upAndDownServo");
         spy = new SpyContinuous(wheel1, wheel2, upAndDown);
+        //claw init
+        RotateServo = hardwareMap.get(Servo.class, "rotateServo");
+        clawServo = hardwareMap.get(Servo.class, "clawServo");
+        claw = new Claw(clawServo,RotateServo);
+
 
 
         waitForStart();
@@ -176,7 +185,7 @@ public class RobotOpMode extends LinearOpMode {
             }
             double triggersum = gamepad2.right_trigger - gamepad1.left_trigger;
             if (triggersum > 0) {
-                spy.intake (triggersum);
+                spy.intake(triggersum);
             }
             if (triggersum < 0) {
                 spy.reject(triggersum);
@@ -184,6 +193,20 @@ public class RobotOpMode extends LinearOpMode {
             if (triggersum == 0) {
                 spy.stop();
             }
+            // claw controll
+            if (gamepad2.dpad_up) {
+                claw.up();
+            }
+            if (gamepad2.dpad_down){
+                claw.down();
+            }
+            if (gamepad2.dpad_right){
+                claw.close();
+            }
+            if (gamepad2.dpad_left){
+                claw.open();
+            }
+
 
             telemetry.addData("wheel1 position", wheel1.getPosition());
             telemetry.addData("wheel2 position", wheel2.getPosition());
