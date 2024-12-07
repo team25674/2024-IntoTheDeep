@@ -39,7 +39,7 @@ public class LinearSlide {
         // "max - 0.5" gives a little buffer zone thing // else function thing is if the slide is above max
        if(((motor.getCurrentPosition() / COUNTS_PER_INCH) <= (max - 0.5)) && ((motor.getCurrentPosition() / COUNTS_PER_INCH) >= 0)) {
            motor.setPower(speed);
-       } else if ((motor.getCurrentPosition() / COUNTS_PER_INCH) <= 0) {
+       } else if ((motor.getCurrentPosition() / COUNTS_PER_INCH) >= 0) {
            motor.setPower(0);
        }
     }

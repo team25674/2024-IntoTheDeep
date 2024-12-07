@@ -53,7 +53,7 @@ public class RobotOpMode extends LinearOpMode {
         telemetry.update();
 
         DcMotor verticalLinearSlideMotor = hardwareMap.get(DcMotor.class, "vlsMotor");
-        //TODO Horizontal linear slide motor needs hardware map, and vertical linear slide needs a rename on the hardware map
+
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
         //Vertical linear slide
         verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES);
