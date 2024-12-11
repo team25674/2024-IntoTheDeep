@@ -11,18 +11,19 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class TutorialServoSweepTester extends LinearOpMode {
 
     private static final int POLLING_INTERVAL_MS = 250;
+    private static final double SERVO_INCREMENT = 0.05;
 
     @Override
     public void runOpMode() {
         // Test servo
-        Servo servo = hardwareMap.get(Servo.class, "wheel1Servo");
+        Servo servo = hardwareMap.get(Servo.class, "clawServo");
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         // Working variables
         long lastExecutionTime = System.currentTimeMillis();
-        int servoPosition = 0;
+        double servoPosition = 0;
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -34,11 +35,17 @@ public class TutorialServoSweepTester extends LinearOpMode {
 
                 // Handle buttons
                 if(gamepad1.dpad_up){
-                    servoPosition += 1;
+                    servoPosition += SERVO_INCREMENT;
+                    if(servoPosition > 1.0){
+                        servoPosition = 1.0;
+                    }
                     servo.setPosition(servoPosition);
                 }
                 if(gamepad1.dpad_down){
-                    servoPosition -= 1;
+                    servoPosition -= SERVO_INCREMENT;
+                    if(servoPosition < 0){
+                        servoPosition = 0;
+                    }
                     servo.setPosition(servoPosition);
                 }
             }
