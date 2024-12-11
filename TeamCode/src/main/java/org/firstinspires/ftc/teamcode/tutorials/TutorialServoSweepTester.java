@@ -24,30 +24,34 @@ public class TutorialServoSweepTester extends LinearOpMode {
         // Working variables
         long lastExecutionTime = System.currentTimeMillis();
         double servoPosition = 0;
+        boolean isQueued = false;
+        double queuedPosition = 0;
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+
+            // Handle buttons
+            if(gamepad1.dpad_up && !isQueued){
+                servoPosition += SERVO_INCREMENT;
+                if(servoPosition > 1.0){
+                    servoPosition = 1.0;
+                }
+                isQueued = true;
+            }
+            if(gamepad1.dpad_down && !isQueued){
+                servoPosition -= SERVO_INCREMENT;
+                if(servoPosition < 0){
+                    servoPosition = 0;
+                }
+                isQueued = true;
+            }
 
             // Has polling interval elapsed?
             long currentTime = System.currentTimeMillis();
             if(currentTime - lastExecutionTime > POLLING_INTERVAL_MS){
                 lastExecutionTime = currentTime; // reset timer
-
-                // Handle buttons
-                if(gamepad1.dpad_up){
-                    servoPosition += SERVO_INCREMENT;
-                    if(servoPosition > 1.0){
-                        servoPosition = 1.0;
-                    }
-                    servo.setPosition(servoPosition);
-                }
-                if(gamepad1.dpad_down){
-                    servoPosition -= SERVO_INCREMENT;
-                    if(servoPosition < 0){
-                        servoPosition = 0;
-                    }
-                    servo.setPosition(servoPosition);
-                }
+                servo.setPosition(servoPosition);
+                isQueued = false;
             }
 
             telemetry.addData("servo position", servo.getPosition());
