@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class SpyContinuous {
     private final double UP_POSITION = 1;
     private final double DOWN_POSTION = .43;
-    private final double STOP_SPEED = 0;
+    private final double STOP_SPEED = 0.5;
 
 
     private Servo wheel1;
@@ -32,8 +32,8 @@ public class SpyContinuous {
     // TODO: Make this continuous
     // Hint: accept the float value from the left trigger of controller 2
     public void reject(double speed) {
-        wheel1.setDirection(Servo.Direction.REVERSE);
-        wheel2.setDirection(Servo.Direction.FORWARD);
+        wheel1.setDirection(Servo.Direction.FORWARD);
+        wheel2.setDirection(Servo.Direction.REVERSE);
         wheel1.setPosition(speed);
         wheel2.setPosition(speed);
     }

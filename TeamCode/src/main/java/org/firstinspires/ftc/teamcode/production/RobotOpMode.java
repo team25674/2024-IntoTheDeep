@@ -183,14 +183,13 @@ public class RobotOpMode extends LinearOpMode {
                 telemetry.addLine("up detected");
 
             }
-            double triggersum = gamepad2.right_trigger - gamepad1.left_trigger;
-            if (triggersum > 0) {
-                spy.intake(triggersum);
+            if (gamepad2.right_trigger > 0) {
+                spy.intake(0.5*gamepad2.right_trigger+0.5);
             }
-            if (triggersum < 0) {
-                spy.reject(triggersum);
-            }
-            if (triggersum == 0) {
+            else if (gamepad2.left_trigger > 0) {
+                spy.reject(0.5-0.5*gamepad2.left_trigger);
+            } else
+             {
                 spy.stop();
             }
             // claw controll
@@ -211,7 +210,6 @@ public class RobotOpMode extends LinearOpMode {
             telemetry.addData("wheel1 position", wheel1.getPosition());
             telemetry.addData("wheel2 position", wheel2.getPosition());
             telemetry.addData("upAndDown position", upAndDown.getPosition());
-            telemetry.addData("triggersum sum",triggersum);
             telemetry.update();
 
         }
