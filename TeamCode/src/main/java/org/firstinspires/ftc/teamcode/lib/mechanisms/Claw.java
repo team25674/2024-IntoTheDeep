@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.lib.mechanisms;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw {
-    private final double GRAB_POSITION = 1;
-    private final double BASKET_POSTION = .43;
+    private final double GRAB_POSITION = 0.8;
+    private final double BASKET_POSTION = 0;
     private final double OPEN_POSITION_CLAWSERVO = .1;
     private final double CLOSE_POSITION_CLAWSERVO = .9;
 
@@ -22,11 +22,11 @@ public class Claw {
     public void open() {
         clawServo.setPosition(OPEN_POSITION_CLAWSERVO);
     }
-    public void up() {
+    public void down() {
         rotateServo.setPosition(GRAB_POSITION);
 
     }
-    public void down() {
+    public void up() {
         rotateServo.setPosition(BASKET_POSTION);
 
     }
