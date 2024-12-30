@@ -29,7 +29,7 @@ public class RobotOpMode extends LinearOpMode {
     private Servo upAndDown;
     private SpyContinuous spy;
     private Servo clawServo;
-    private Servo RotateServo;
+    private Servo rotateServo;
     private Claw claw;
 
     //buton states
@@ -69,9 +69,9 @@ public class RobotOpMode extends LinearOpMode {
         upAndDown = hardwareMap.get(Servo.class, "upAndDownServo");
         spy = new SpyContinuous(wheel1, wheel2, upAndDown);
         //claw init
-        RotateServo = hardwareMap.get(Servo.class, "rotateServo");
+        rotateServo = hardwareMap.get(Servo.class, "rotateServo");
         clawServo = hardwareMap.get(Servo.class, "clawServo");
-        claw = new Claw(clawServo,RotateServo);
+        claw = new Claw(clawServo, rotateServo);
 
 
 
