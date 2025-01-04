@@ -3,9 +3,10 @@ package org.firstinspires.ftc.teamcode.lib.mechanisms;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class SpyContinuous {
-    private final double UP_POSITION = 1;
-    private final double DOWN_POSTION = .43;
+    private final double UP_POSITION = .61;
+    private final double DOWN_POSTION = .02;
     private final double STOP_SPEED = 0.5;
+
 
 
     private Servo wheel1;
