@@ -60,9 +60,9 @@ public class RobotOpMode extends LinearOpMode {
 
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
         //Vertical linear slide
-        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES);
+        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, telemetry);
         //Horizontal linear slide TODO Measure real value of horizontalLinearSlide max position
-        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 32);
+        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 32, telemetry);
         // spy servos
         wheel1 = hardwareMap.get(Servo.class, "wheel1Servo");
         wheel2 = hardwareMap.get(Servo.class, "wheel2Servo");
