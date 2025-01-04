@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
 
@@ -27,6 +28,9 @@ public class RobotOpMode extends LinearOpMode {
     private Servo wheel2;
     private Servo upAndDown;
     private SpyContinuous spy;
+    private Servo clawServo;
+    private Servo rotateServo;
+    private Claw claw;
 
     //buton states
     boolean lastButtonY = false;
@@ -56,14 +60,19 @@ public class RobotOpMode extends LinearOpMode {
 
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
         //Vertical linear slide
-        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, telemetry);
+        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES);
         //Horizontal linear slide TODO Measure real value of horizontalLinearSlide max position
-        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 32, telemetry);
+        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 32);
         // spy servos
         wheel1 = hardwareMap.get(Servo.class, "wheel1Servo");
         wheel2 = hardwareMap.get(Servo.class, "wheel2Servo");
         upAndDown = hardwareMap.get(Servo.class, "upAndDownServo");
         spy = new SpyContinuous(wheel1, wheel2, upAndDown);
+        //claw init
+        rotateServo = hardwareMap.get(Servo.class, "rotateServo");
+        clawServo = hardwareMap.get(Servo.class, "clawServo");
+        claw = new Claw(clawServo, rotateServo);
+
 
 
         waitForStart();
@@ -122,10 +131,10 @@ public class RobotOpMode extends LinearOpMode {
             rightBackDrive.setPower(rightBackPower);
 
             // Show the elapsed game time and wheel power.
-            //telemetry.addData("Status", "Run Time: " + runtime.toString());
-            //telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
-            //telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
-            //telemetry.update();
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
+            telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            telemetry.update();
 
 
             //------------------------------------------------------
@@ -154,39 +163,54 @@ public class RobotOpMode extends LinearOpMode {
             }
 
             // HORIZONTAL LINEAR SLIDE
-//            if (gamepad2.left_stick_y != 0) {
-//                horizontalLinearSlide.extend(gamepad2.left_stick_y);
-//            } else if (!horizontalLinearSlide.motor.isBusy()) {
-//                horizontalLinearSlide.motor.setPower(0);
-//            }
+            if (gamepad2.left_stick_y != 0) {
+                horizontalLinearSlide.extend(gamepad2.left_stick_y);
+            } else if (!horizontalLinearSlide.motor.isBusy()) {
+                horizontalLinearSlide.motor.setPower(0);
+            }
 
             lastButtonY = gamepad2.y;
             lastButtonB = gamepad2.b;
             lastButtonA = gamepad2.a;
 
             // Spy controls
-            if (gamepad2.dpad_down) {
+            if (gamepad2.left_bumper) {
                 spy.down();
-               // telemetry.addLine("down detected");
+                telemetry.addLine("down detected");
             }
-            if (gamepad2.dpad_up) {
+            if (gamepad2.right_bumper) {
                 spy.up();
-                // telemetry.addLine("up detected");
+                telemetry.addLine("up detected");
+
             }
-            // TODO: Change this to right trigger
-            if (gamepad2.dpad_left) {
-                spy.intake();
-                //telemetry.addLine("left detected");
+            if (gamepad2.right_trigger > 0) {
+                spy.intake(0.5*gamepad2.right_trigger+0.5);
             }
-            // TODO: Change this to left trigger
-            if (gamepad2.dpad_right) {
-                spy.reject();
-                //telemetry.addLine("right detected");
+            else if (gamepad2.left_trigger > 0) {
+                spy.reject(0.5-0.5*gamepad2.left_trigger);
+            } else
+             {
+                spy.stop();
             }
-//            telemetry.addData("wheel1 position", wheel1.getPosition());
-//            telemetry.addData("wheel2 position", wheel2.getPosition());
-//            telemetry.addData("upAndDown position", upAndDown.getPosition());
-//            telemetry.update();
+            // claw controll
+            if (gamepad2.dpad_up) {
+                claw.up();
+            }
+            if (gamepad2.dpad_down){
+                claw.down();
+            }
+            if (gamepad2.dpad_right){
+                claw.close();
+            }
+            if (gamepad2.dpad_left){
+                claw.open();
+            }
+
+
+            telemetry.addData("wheel1 position", wheel1.getPosition());
+            telemetry.addData("wheel2 position", wheel2.getPosition());
+            telemetry.addData("upAndDown position", upAndDown.getPosition());
+            telemetry.update();
 
         }
 
