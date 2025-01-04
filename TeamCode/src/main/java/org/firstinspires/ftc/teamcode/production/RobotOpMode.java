@@ -53,8 +53,8 @@ public class RobotOpMode extends LinearOpMode {
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
+       //telemetry.addData("Status", "Initialized");
+        //telemetry.update();
 
         DcMotor verticalLinearSlideMotor = hardwareMap.get(DcMotor.class, "vlsMotor");
 

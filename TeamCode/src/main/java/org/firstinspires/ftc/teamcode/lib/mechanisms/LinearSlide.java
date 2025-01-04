@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.lib.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class LinearSlide {
     static final double COUNTS_PER_INCH = 112.8181;
     public static int POS_LOWER_BASKET_INCHES = 30;
@@ -42,6 +44,9 @@ public class LinearSlide {
        } else if ((motor.getCurrentPosition() / COUNTS_PER_INCH) >= 0) {
            motor.setPower(0);
        }
+    }
+    public void telemetry(Telemetry telemetry){
+        telemetry.addData("Test", "LinearSlide test");
     }
 
 }

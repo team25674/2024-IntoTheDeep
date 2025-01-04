@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.lib.mechanisms;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class SpyContinuous {
     private final double UP_POSITION = 1;
     private final double DOWN_POSTION = .43;
@@ -50,6 +52,9 @@ public class SpyContinuous {
     public void stop() {
         wheel1.setPosition(STOP_SPEED);
         wheel2.setPosition(STOP_SPEED);
+    }
+    public void telemetry(Telemetry telemetry){
+        telemetry.addData("Test", "spy test");
     }
 }
 

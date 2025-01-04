@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.lib.mechanisms;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class Claw {
     private final double GRAB_POSITION = 0.8;
     private final double BASKET_POSTION = 0;
@@ -29,5 +31,8 @@ public class Claw {
     public void up() {
         rotateServo.setPosition(BASKET_POSTION);
 
+    }
+    public void telemetry(Telemetry telemetry){
+        telemetry.addData("Test", "claw test");
     }
 }
