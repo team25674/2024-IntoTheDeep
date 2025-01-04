@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode.lib.mechanisms;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw {
-    private final double GRAB_POSITION = 0.8;
+    private final double GRAB_POSITION = 0.75;
     private final double BASKET_POSTION = 0;
-    private final double OPEN_POSITION_CLAWSERVO = .1;
+    private final double OPEN_POSITION_CLAWSERVO = .25;
     private final double CLOSE_POSITION_CLAWSERVO = .9;
 
     private Servo clawServo;
