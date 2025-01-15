@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class LinearSlide {
     static final double COUNTS_PER_INCH = 112.8181;
     public static int POS_LOWER_BASKET_INCHES = 30;
-    public static int POS_UPPER_BASKET_INCHES = 24;
+    public static int POS_UPPER_BASKET_INCHES = 35;
     Telemetry telemetry;
     public DcMotor motor;
     int max;
