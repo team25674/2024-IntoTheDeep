@@ -38,16 +38,37 @@ public class Robot {
     }
 
     // Method with times for right front drive, left back drive, right back drive, left back drive
-    public void autoDriveForward(double speed, double rfTime, double lfTime, double rbTime, double lbTime){
-
-        ElapsedTime timer = new ElapsedTime();
-
-        int stoppedMotorNum = 0;
+    public void autoDriveY(double speed, double rfTime, double lfTime, double rbTime, double lbTime){
 
         leftFrontDrive.setPower(speed);
         rightFrontDrive.setPower(speed);
         leftBackDrive.setPower(speed);
         rightBackDrive.setPower(speed);
+
+        checkForStoppage(rfTime, lfTime, rbTime, lbTime);
+        }
+    public void autoDriveX(double speed, double rfTime, double lfTime, double rbTime, double lbTime){
+
+
+        //Right = positive speed
+        leftFrontDrive.setPower(speed);
+        rightFrontDrive.setPower(-speed);
+        leftBackDrive.setPower(-speed);
+        rightBackDrive.setPower(speed);
+        checkForStoppage(rfTime, lfTime, rbTime, lbTime);
+    }
+    public void autoDriveRot(double speed, double rfTime, double lfTime, double rbTime, double lbTime){
+        //Clockwise = positive speed
+        leftFrontDrive.setPower(speed);
+        rightFrontDrive.setPower(-speed);
+        leftBackDrive.setPower(speed);
+        rightBackDrive.setPower(-speed);
+        checkForStoppage(rfTime, lfTime, rbTime, lbTime);
+    }
+    public void checkForStoppage(double rfTime, double lfTime, double rbTime, double lbTime){
+        ElapsedTime timer = new ElapsedTime();
+
+        int stoppedMotorNum = 0;
 
         while(opMode.opModeIsActive() && stoppedMotorNum != 4){
             //Check for stoppage
@@ -58,18 +79,17 @@ public class Robot {
 
             if(timer.seconds() >= lfTime && leftFrontDrive.getPower() != 0){
                 leftFrontDrive.setPower(0);
+                stoppedMotorNum ++;
             }
 
             if(timer.seconds() >= rbTime && rightBackDrive.getPower() != 0){
                 rightBackDrive.setPower(0);
+                stoppedMotorNum ++;
             }
-
-            if(timer.seconds() >= lbTime && leftBackDrive.getPower() != 0){
-                leftBackDrive.setPower(0);
-
+            if(timer.seconds() >= lbTime && leftBackDrive.getPower() != 0) {
+                 leftBackDrive.setPower(0);
+                stoppedMotorNum ++;
             }
-
         }
-
     }
 }
