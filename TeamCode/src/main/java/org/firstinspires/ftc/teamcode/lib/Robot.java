@@ -1,8 +1,14 @@
 package org.firstinspires.ftc.teamcode.lib;
 
+import static java.lang.Thread.sleep;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
+import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 
 public class Robot {
 
@@ -10,8 +16,16 @@ public class Robot {
     private DcMotor leftBackDrive = null;
     private DcMotor rightFrontDrive = null;
     private DcMotor rightBackDrive = null;
+    private Servo clawServo;
+    private Servo rotateServo;
+    private Claw claw;
+    private LinearSlide verticalLinearSlide = null;
+
+
 
     private LinearOpMode opMode = null;
+
+
 
 
     public Robot(LinearOpMode opMode, DcMotor rightBackDrive, DcMotor rightFrontDrive, DcMotor leftBackDrive, DcMotor leftFrontDrive) {
@@ -22,6 +36,10 @@ public class Robot {
         this.rightFrontDrive = rightFrontDrive;
         this.leftBackDrive = leftBackDrive;
         this.leftFrontDrive = leftFrontDrive;
+
+        DcMotor verticalLinearSlideMotor = opMode.hardwareMap.get(DcMotor.class, "vlsMotor");
+        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
+
 
         // set motor directions
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -91,5 +109,30 @@ public class Robot {
                 stoppedMotorNum ++;
             }
         }
+    }
+    //Maybe change speed to be configurable
+    // IMPORTANT: If you are planning to open the claw, do it right after calling the autoUpBasket method.
+    public void autoUpBasket(){
+        ElapsedTime timer = new ElapsedTime();
+        verticalLinearSlide.goToPosition(LinearSlide.POS_UPPER_BASKET_INCHES);
+        while(opMode.opModeIsActive() && !verticalLinearSlide.motor.isBusy()){
+
+        }
+    }
+    public void autoZeroLinearSlide(){
+        ElapsedTime timer = new ElapsedTime();
+        verticalLinearSlide.goToPosition(0);
+        while(opMode.opModeIsActive() && !verticalLinearSlide.motor.isBusy()){
+
+        }
+    }
+    //True = Open, False = close
+    public void autoClawGrab(boolean grabState){
+        if(grabState){
+            claw.open();
+        }else{
+            claw.close();
+        }
+        sleep(250);
     }
 }
