@@ -180,7 +180,7 @@ public class RobotOpMode extends LinearOpMode {
             }
             if (gamepad2.right_bumper) {
                 spy.up();
-                //telemetry.addLine("up detected");
+                telemetry.addLine("up detected");
 
             }
             if (gamepad2.right_trigger > 0) {
