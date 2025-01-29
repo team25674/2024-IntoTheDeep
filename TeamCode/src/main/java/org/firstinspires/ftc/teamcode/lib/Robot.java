@@ -112,7 +112,7 @@ public class Robot {
     }
     //Maybe change speed to be configurable
     // IMPORTANT: If you are planning to open the claw, do it right after calling the autoUpBasket method.
-    public void autoUpBasket(){
+    public void autoHighBasket(){
         ElapsedTime timer = new ElapsedTime();
         verticalLinearSlide.goToPosition(LinearSlide.POS_UPPER_BASKET_INCHES);
         while(opMode.opModeIsActive() && !verticalLinearSlide.motor.isBusy()){
@@ -133,6 +133,10 @@ public class Robot {
         }else{
             claw.close();
         }
-        sleep(250);
+        try {
+            sleep(250);
+        } catch(InterruptedException e) {
+            // oh no!
+        }
     }
 }

@@ -45,8 +45,8 @@ public class AutoPark extends LinearOpMode {
         verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
 
 
-        frobot.autoClawGrab(true);
-        frobot.autoClawGrab(false);
+//        frobot.autoClawGrab(true);
+//        frobot.autoClawGrab(false);
 
 
         waitForStart();
