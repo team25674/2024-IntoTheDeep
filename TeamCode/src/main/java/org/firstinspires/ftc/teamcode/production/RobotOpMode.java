@@ -148,7 +148,7 @@ public class RobotOpMode extends LinearOpMode {
                 verticalLinearSlide.goToPosition(LinearSlide.POS_UPPER_BASKET_INCHES);
             }
 
-            if (gamepad2.b) {
+            if (lastButtonB != gamepad1.b) {
                 verticalLinearSlide.goToPosition(LinearSlide.POS_LOWER_BASKET_INCHES);
             }
 

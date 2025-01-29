@@ -190,6 +190,7 @@ public class TutorialDriveToEncoderPosition extends OpMode {
 
         // Turn On RUN_TO_POSITION
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // Start motion
         motor.setPower(Math.abs(speed));
