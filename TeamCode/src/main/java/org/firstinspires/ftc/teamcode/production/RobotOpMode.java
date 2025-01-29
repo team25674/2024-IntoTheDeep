@@ -60,9 +60,9 @@ public class RobotOpMode extends LinearOpMode {
 
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
         //Vertical linear slide
-        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
+        verticalLinearSlide = new LinearSlide("vertical", verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES);
         //Horizontal linear slide TODO Measure real value of horizontalLinearSlide max position
-        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 16, telemetry);
+        horizontalLinearSlide = new LinearSlide("horizontal", horizontalLinearSlideMotor, 16);
         // spy servos
         wheel1 = hardwareMap.get(Servo.class, "wheel1Servo");
         wheel2 = hardwareMap.get(Servo.class, "wheel2Servo");
@@ -206,11 +206,12 @@ public class RobotOpMode extends LinearOpMode {
                 claw.open();
             }
 
-
+            verticalLinearSlide.telemetry(telemetry);
 //            telemetry.addData("wheel1 position", wheel1.getPosition());
 //            telemetry.addData("wheel2 position", wheel2.getPosition());
 //            telemetry.addData("upAndDown position", upAndDown.getPosition());
 //            telemetry.update();
+
 
         }
 
