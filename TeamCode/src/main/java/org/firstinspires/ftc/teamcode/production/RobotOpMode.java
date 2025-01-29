@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode.production;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -56,13 +57,13 @@ public class RobotOpMode extends LinearOpMode {
        // telemetry.addData("Status", "Initialized");
       //  telemetry.update();
 
-        DcMotor verticalLinearSlideMotor = hardwareMap.get(DcMotor.class, "vlsMotor");
+        DcMotorEx verticalLinearSlideMotor = hardwareMap.get(DcMotorEx.class, "vlsMotor");
 
-        DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
+        DcMotorEx horizontalLinearSlideMotor = hardwareMap.get(DcMotorEx.class, "hlsMotor");
         //Vertical linear slide
         verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
         //Horizontal linear slide TODO Measure real value of horizontalLinearSlide max position
-        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 16, telemetry);
+        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 16, null);
         // spy servos
         wheel1 = hardwareMap.get(Servo.class, "wheel1Servo");
         wheel2 = hardwareMap.get(Servo.class, "wheel2Servo");
@@ -143,24 +144,26 @@ public class RobotOpMode extends LinearOpMode {
 
             //Button detection
 
-            if (lastButtonY && !gamepad2.y) {
+            if (gamepad2.y) {
                 verticalLinearSlide.goToPosition(LinearSlide.POS_UPPER_BASKET_INCHES);
             }
 
-            if (lastButtonB && !gamepad2.b) {
+            if (gamepad2.b) {
                 verticalLinearSlide.goToPosition(LinearSlide.POS_LOWER_BASKET_INCHES);
             }
 
-            if (lastButtonA && !gamepad2.a) {
+            if (gamepad2.a) {
                 verticalLinearSlide.goToPosition(0);
             }
 
+            verticalLinearSlide.telemetry(telemetry);
+
             // VERTICAL LINEAR SLIDE
-            if (gamepad2.right_stick_y != 0) {
-                verticalLinearSlide.extend(gamepad2.right_stick_y);// y -1.0 <> 1.0   servo takes 0-1.0, direction
-            } else if (!verticalLinearSlide.motor.isBusy()) {
-                verticalLinearSlide.motor.setPower(0);
-            }
+//            if (gamepad2.right_stick_y != 0) {
+//                verticalLinearSlide.extend(gamepad2.right_stick_y);// y -1.0 <> 1.0   servo takes 0-1.0, direction
+//            } else if (!verticalLinearSlide.motor.isBusy()) {
+//                verticalLinearSlide.motor.setPower(0);
+//            }
 
             // HORIZONTAL LINEAR SLIDE
             if (gamepad2.left_stick_y != 0) {
