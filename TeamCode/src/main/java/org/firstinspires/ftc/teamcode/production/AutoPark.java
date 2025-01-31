@@ -39,14 +39,15 @@ public class AutoPark extends LinearOpMode {
 
         DcMotor verticalLinearSlideMotor = hardwareMap.get(DcMotor.class, "vlsMotor");
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
-
+        claw = new Claw(clawServo, rotateServo);
         Robot frobot = new Robot(this, rightBackDrive, rightFrontDrive, leftBackDrive, leftFrontDrive);
 
         verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
 
-
-//        frobot.autoClawGrab(true);
-//        frobot.autoClawGrab(false);
+/*
+        frobot.autoClawGrab(true);
+        Robot.sleep(3000);
+        frobot.autoClawGrab(false);*/
 
 
         waitForStart();
@@ -57,6 +58,16 @@ public class AutoPark extends LinearOpMode {
         frobot.autoDriveX(0.35, 5, 5, 5, 5);
         frobot.autoDriveX(-0.35, 5, 5, 5, 5);
         frobot.autoDriveRot(-0.35, 10, 10, 10, 10);
+
+        //Score
+//        claw.down();
+//        frobot.autoDriveY(0.35, 1, 1, 1, 1);
+//        frobot.autoDriveRot(-0.35, 2, 2, 2, 2);
+//        frobot.autoDriveY(0.35, 4, 4, 4, 4);
+//        frobot.autoDriveRot(-0.35, 4, 4, 4, 4);
+//        frobot.autoHighBasket();
+//        claw.up();
+//        frobot.autoClawGrab(true);
 
         //Claw test
 //        frobot.autoZeroLinearSlide();
