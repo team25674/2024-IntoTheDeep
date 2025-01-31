@@ -11,9 +11,8 @@ import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 
 
-
 @Autonomous(name = "Autopark", group = "Auto")
-public class AutoPark extends LinearOpMode {
+public class AutoBasket extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
@@ -38,8 +37,10 @@ public class AutoPark extends LinearOpMode {
         rightBackDrive = hardwareMap.get(DcMotor.class, "motor3");
 
         DcMotor verticalLinearSlideMotor = hardwareMap.get(DcMotor.class, "vlsMotor");
-        DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
+        rotateServo = hardwareMap.get(Servo.class, "rotateServo");
+        clawServo = hardwareMap.get(Servo.class, "clawServo");
         claw = new Claw(clawServo, rotateServo);
+
         Robot frobot = new Robot(this, rightBackDrive, rightFrontDrive, leftBackDrive, leftFrontDrive);
 
         verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
@@ -54,32 +55,17 @@ public class AutoPark extends LinearOpMode {
 
         // Movement Test
         frobot.autoDriveY(0.35, 5, 5, 5, 5);
-//        frobot.autoDriveY(-0.35, 5, 5, 5, 5);
-//        frobot.autoDriveX(0.35, 5, 5, 5, 5);
-//        frobot.autoDriveX(-0.35, 5, 5, 5, 5);
-//        frobot.autoDriveRot(-0.35, 10, 10, 10, 10);
 
         //Score
-//        claw.down();
-//        frobot.autoDriveY(0.35, 1, 1, 1, 1);
-//        frobot.autoDriveRot(-0.35, 2, 2, 2, 2);
-//        frobot.autoDriveY(0.35, 4, 4, 4, 4);
-//        frobot.autoDriveRot(-0.35, 4, 4, 4, 4);
-//        frobot.autoHighBasket();
-//        claw.up();
-//        frobot.autoClawGrab(true);
+        claw.down();
+        frobot.autoDriveY(0.35, 1, 1, 1, 1);
+        frobot.autoDriveRot(-0.35, 2, 2, 2, 2);
+        frobot.autoDriveY(0.35, 4, 4, 4, 4);
+        frobot.autoDriveRot(-0.35, 4, 4, 4, 4);
+        frobot.autoHighBasket();
+        claw.up();
+        frobot.autoClawGrab(true);
 
-        //Claw test
-//        frobot.autoZeroLinearSlide();
-//        frobot.autoUpBasket();
-//        frobot.autoClawGrab(true);
-//        frobot.autoClawGrab(false);
-//        frobot.autoZeroLinearSlide();
-
-
-        // AutoPark code
-//        frobot.autoDriveY(-0.2, 0.1, 0.1, 0.1, 0.1);
-//        frobot.autoDriveY(0.2, 3, 3, 3, 3);
         runtime.reset();
 
 
