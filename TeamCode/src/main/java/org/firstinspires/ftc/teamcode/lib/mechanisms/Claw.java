@@ -6,7 +6,6 @@ public class Claw {
     private final double GRAB_POSITION = 1;
     private final double BASKET_POSTION = 0.;
     private final double OPEN_POSITION_CLAWSERVO = .6;
-
     private final double CLOSE_POSITION_CLAWSERVO = .9;
 
     private Servo clawServo;
