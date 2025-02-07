@@ -79,7 +79,7 @@ public class AutoPark extends LinearOpMode {
 
         // AutoPark code
         frobot.autoDriveY(0.2, 0.1, 0.1, 0.1, 0.1);
-        frobot.autoDriveX(0.6, 3,3, 3,3);
+        frobot.autoDriveX(0.6, 1.4,1.4, 1.4,1.4);
         runtime.reset();
 
 
