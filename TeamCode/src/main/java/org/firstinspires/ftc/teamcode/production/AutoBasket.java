@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 
 
-@Autonomous(name = "Autopark", group = "Auto")
+@Autonomous(name = "AutoBasket", group = "Auto")
 public class AutoBasket extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
@@ -54,12 +54,12 @@ public class AutoBasket extends LinearOpMode {
         waitForStart();
 
         // Movement Test
-        frobot.autoDriveY(0.35, 5, 5, 5, 5);
+        //frobot.autoDriveY(0.35, 5, 5, 5, 5);
 
-        //Score
+        //AutoBasket(Not tested yet)
         claw.down();
-        frobot.autoDriveY(0.35, 1, 1, 1, 1);
-        frobot.autoDriveRot(-0.35, 2, 2, 2, 2);
+        frobot.autoDriveY(0.35, .25, .25, .25, .25);
+        frobot.autoDriveRot(-0.35, 0.4, .4, .4, .4);
         frobot.autoDriveY(0.35, 4, 4, 4, 4);
         frobot.autoDriveRot(-0.35, 4, 4, 4, 4);
         frobot.autoHighBasket();
