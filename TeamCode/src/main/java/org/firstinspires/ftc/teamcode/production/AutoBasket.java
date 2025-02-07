@@ -58,12 +58,13 @@ public class AutoBasket extends LinearOpMode {
 
         //AutoBasket(Not tested yet)
         claw.down();
-        frobot.autoDriveY(0.35, .25, .25, .25, .25);
-        frobot.autoDriveRot(-0.35, 0.4, .4, .4, .4);
-        frobot.autoDriveY(0.35, 4, 4, 4, 4);
-        frobot.autoDriveRot(-0.35, 4, 4, 4, 4);
+        frobot.autoClawGrab(false);
+        frobot.autoDriveX(-0.2, 0.3, 0.3, 0.3, 0.3);
+        frobot.autoDriveY(-.6, 1, 1, 1, 1);
+        frobot.autoDriveRot(0.35, 1, 1, 1, 1);
         frobot.autoHighBasket();
         claw.up();
+        frobot.autoDriveY(-.2, 0.1, .1, .1, .1);
         frobot.autoClawGrab(true);
 
         runtime.reset();
