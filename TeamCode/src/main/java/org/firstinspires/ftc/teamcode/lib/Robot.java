@@ -28,7 +28,7 @@ public class Robot {
 
 
 
-    public                      Robot(LinearOpMode opMode, DcMotor rightBackDrive, DcMotor rightFrontDrive, DcMotor leftBackDrive, DcMotor leftFrontDrive) {
+    public Robot(LinearOpMode opMode, DcMotor rightBackDrive, DcMotor rightFrontDrive, DcMotor leftBackDrive, DcMotor leftFrontDrive) {
 
         this.opMode = opMode;
 
@@ -39,6 +39,8 @@ public class Robot {
 
         DcMotor verticalLinearSlideMotor = opMode.hardwareMap.get(DcMotor.class, "vlsMotor");
         verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
+        rotateServo = opMode.hardwareMap.get(Servo.class, "rotateServo");
+        clawServo = opMode.hardwareMap.get(Servo.class, "clawServo");
         claw = new Claw(clawServo, rotateServo);
 
         // set motor directions

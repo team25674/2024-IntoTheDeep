@@ -10,9 +10,8 @@ import org.firstinspires.ftc.teamcode.lib.Robot;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 
+@Autonomous(name = "AutoPark", group = "Auto")
 
-
-@Autonomous(name = "Autopark", group = "Auto")
 public class AutoPark extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
