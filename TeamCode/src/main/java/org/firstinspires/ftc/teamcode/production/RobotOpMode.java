@@ -37,6 +37,8 @@ public class RobotOpMode extends LinearOpMode {
     boolean lastButtonB = false;
     boolean lastButtonA = false;
 
+    boolean maintanVPos = false;
+
     @Override
     public void runOpMode() {
 
@@ -143,23 +145,28 @@ public class RobotOpMode extends LinearOpMode {
 
             //Button detection
 
-            if (lastButtonY && !gamepad2.y) {
+            if (gamepad2.y) {
                 verticalLinearSlide.goToPosition(LinearSlide.POS_UPPER_BASKET_INCHES);
+                maintanVPos = true;
             }
 
-            if (lastButtonB && !gamepad2.b) {
+            if (gamepad2.b) {
                 verticalLinearSlide.goToPosition(LinearSlide.POS_LOWER_BASKET_INCHES);
+                maintanVPos = true;
             }
 
-            if (lastButtonA && !gamepad2.a) {
+            if (gamepad2.a) {
                 verticalLinearSlide.goToPosition(0);
+                maintanVPos = false;
             }
 
             // VERTICAL LINEAR SLIDE
             if (gamepad2.right_stick_y != 0) {
                 verticalLinearSlide.extend(gamepad2.right_stick_y);// y -1.0 <> 1.0   servo takes 0-1.0, direction
-            } else if (!verticalLinearSlide.motor.isBusy()) {
+                maintanVPos = false;
+            } else if (!verticalLinearSlide.motor.isBusy() && !maintanVPos) {
                 verticalLinearSlide.motor.setPower(0);
+
             }
 
             // HORIZONTAL LINEAR SLIDE

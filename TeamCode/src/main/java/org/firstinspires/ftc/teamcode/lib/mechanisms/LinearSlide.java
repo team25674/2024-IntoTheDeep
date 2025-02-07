@@ -30,7 +30,7 @@ public class LinearSlide {
 
     public void goToPosition(int positionInches) {
         // Determine new target position, and pass to motor controller
-        int newTarget = (int) (positionInches * COUNTS_PER_INCH);
+        int newTarget = (int) (positionInches * COUNTS_PER_INCH) * -1;
         motor.setTargetPosition(newTarget);
 
         // Turn On RUN_TO_POSITION
