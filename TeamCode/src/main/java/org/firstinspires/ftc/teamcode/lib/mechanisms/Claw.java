@@ -30,4 +30,13 @@ public class Claw {
         rotateServo.setPosition(BASKET_POSTION);
 
     }
+    public double lastClawServoPosition() {
+        rotateServo.getPosition();
+        clawServo.getPosition();
+    }
+    public double clawServoDirection() {
+     rotateServo.getDirection();
+     clawServo.getDirection();
+    }
+
 }
