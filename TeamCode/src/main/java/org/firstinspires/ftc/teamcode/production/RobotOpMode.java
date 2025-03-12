@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
 public class RobotOpMode extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
-    private ElapsedTime runtime = new ElapsedTime();
+    private final ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftFrontDrive = null;
     private DcMotor leftBackDrive = null;
     private DcMotor rightFrontDrive = null;
@@ -39,8 +39,17 @@ public class RobotOpMode extends LinearOpMode {
 
     boolean maintanVPos = false;
 
+    public void telemetry(){
+        //TODO: Add telemetry data
+
+        telemetry.addData("Button A", gamepad1.a);
+        telemetry.update();
+    }
+
     @Override
     public void runOpMode() {
+
+
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
@@ -148,11 +157,12 @@ public class RobotOpMode extends LinearOpMode {
             if (gamepad2.y) {
                 verticalLinearSlide.goToPosition(LinearSlide.POS_UPPER_BASKET_INCHES);
                 maintanVPos = true;
+                ;
             }
 
             if (gamepad2.b) {
                 verticalLinearSlide.goToPosition(LinearSlide.POS_LOWER_BASKET_INCHES);
-                maintanVPos = true;
+
             }
 
             if (gamepad2.a) {
@@ -218,7 +228,7 @@ public class RobotOpMode extends LinearOpMode {
 //            telemetry.addData("wheel2 position", wheel2.getPosition());
 //            telemetry.addData("upAndDown position", upAndDown.getPosition());
 //            telemetry.update();
-
+            telemetry();
         }
 
     }
