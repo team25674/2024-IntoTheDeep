@@ -19,14 +19,11 @@ public class SpyContinuous {
         this.upAndDown = upAndDown;
     }
 
-    // TODO: Make this continuous
-    // Hint: accept the float value from the right trigger of controller 2
     public void intake(double speed) {
         wheel1.setDirection(Servo.Direction.FORWARD); //rightsticky needs to be between 0-1 instead of -1 and 1, so divide by one??Spy
         wheel2.setDirection(Servo.Direction.REVERSE);
         wheel1.setPosition(speed);
         wheel2.setPosition(speed);
-
 
     }
 
