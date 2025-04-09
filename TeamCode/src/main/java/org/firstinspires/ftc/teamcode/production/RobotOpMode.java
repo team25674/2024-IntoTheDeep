@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.lib.TelemetryManager;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
@@ -66,7 +67,7 @@ public class RobotOpMode extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
        // telemetry.addData("Status", "Initialized");
       //  telemetry.update();
-
+        TelemetryManager telemetryManager = new TelemetryManager(telemetry);
         DcMotor verticalLinearSlideMotor = hardwareMap.get(DcMotor.class, "vlsMotor");
 
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
@@ -82,7 +83,11 @@ public class RobotOpMode extends LinearOpMode {
         //claw init
         rotateServo = hardwareMap.get(Servo.class, "rotateServo");
         clawServo = hardwareMap.get(Servo.class, "clawServo");
-        claw = new Claw(clawServo, rotateServo);
+        claw = new Claw(clawServo, rotateServo, telemetryManager);
+
+        // telemetryManager = new ....
+//        claw = new Claw(clawServo, rotateServo, telemetryManager);
+//        spy = new SpyContinuous(wheel1, wheel2, upAndDown, telemetryManager);
 
 
 
