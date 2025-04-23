@@ -233,6 +233,7 @@ public class RobotOpMode extends LinearOpMode {
 //            telemetry.addData("wheel2 position", wheel2.getPosition());
 //            telemetry.addData("upAndDown position", upAndDown.getPosition());
 //            telemetry.update();
+             telemetryManager.
             telemetry();
         }
 

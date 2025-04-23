@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.lib.mechanisms;
 
+import static org.firstinspires.ftc.teamcode.lib.TelemetryManager.CLAW_SERVO_MOUTH;
 import static org.firstinspires.ftc.teamcode.lib.TelemetryManager.CLAW_SERVO_POS;
 
 import com.qualcomm.robotcore.hardware.Servo;
@@ -27,13 +28,16 @@ public class Claw {
 
     public void close() {
         clawServo.setPosition(CLOSE_POSITION_CLAWSERVO);
+        telemetryManager.addTelemetry(CLAW_SERVO_MOUTH,Double.toString(CLOSE_POSITION_CLAWSERVO));
     }
     public void open() {
         clawServo.setPosition(OPEN_POSITION_CLAWSERVO);
+        telemetryManager.addTelemetry(CLAW_SERVO_MOUTH,Double.toString(OPEN_POSITION_CLAWSERVO));
     }
     public void down() {
         rotateServo.setPosition(GRAB_POSITION);
         telemetryManager.addTelemetry(CLAW_SERVO_POS,Double.toString(clawServo.getPosition()));
+
     }
     public void up() {
         rotateServo.setPosition(BASKET_POSTION);
