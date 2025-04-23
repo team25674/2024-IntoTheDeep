@@ -61,7 +61,10 @@ public class McDoubletheOpIsAGoodName extends LinearOpMode {
             bigmcmac.mcspinny(mchermes);
 
 
-            lastButtonY = gamepad2.y;
+            boolean mRbullymcMoomooJr = gamepad2.y;
+            if (mRbullymcMoomooJr) {
+                bigmcmac.bIGmcSTOPIE();
+            }
 
 
         }
