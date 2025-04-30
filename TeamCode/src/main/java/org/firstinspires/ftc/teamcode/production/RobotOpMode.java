@@ -3,6 +3,9 @@ package org.firstinspires.ftc.teamcode.production;
 
 //(use for later)import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+import static org.firstinspires.ftc.teamcode.lib.TelemetryManager.CLAW_SERVO_MOUTH;
+import static org.firstinspires.ftc.teamcode.lib.TelemetryManager.CLAW_SERVO_POS;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,6 +16,9 @@ import org.firstinspires.ftc.teamcode.lib.TelemetryManager;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @TeleOp(name = "RobotOpMode", group = "Linear OpMode")
 public class RobotOpMode extends LinearOpMode {
@@ -32,6 +38,7 @@ public class RobotOpMode extends LinearOpMode {
     private Servo clawServo;
     private Servo rotateServo;
     private Claw claw;
+    private TelemetryManager telemetryManager;
 
     //buton states
     boolean lastButtonY = false;
@@ -43,21 +50,24 @@ public class RobotOpMode extends LinearOpMode {
     public void telemetry(){
         //TODO: Add telemetry data
 
-        telemetry.addData("Button A", gamepad1.a);
-        telemetry.update();
+        List<String> telemetryList = new ArrayList<>();
+        telemetryList.add(CLAW_SERVO_POS);
+        telemetryList.add(CLAW_SERVO_MOUTH);
+        telemetryManager.passToTelemetry(telemetryList);
     }
 
     @Override
     public void runOpMode() {
 
 
-
+        telemetryManager = new TelemetryManager(telemetry);
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
         leftFrontDrive = hardwareMap.get(DcMotor.class, "motor0");
         leftBackDrive = hardwareMap.get(DcMotor.class, "motor2");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "motor1");
         rightBackDrive = hardwareMap.get(DcMotor.class, "motor3");
+
         //
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -72,9 +82,9 @@ public class RobotOpMode extends LinearOpMode {
 
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
         //Vertical linear slide
-        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
+        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES);
         //Horizontal linear slide TODO Measure real value of horizontalLinearSlide max position
-        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 16, telemetry);
+        horizontalLinearSlide = new LinearSlide(horizontalLinearSlideMotor, 16);
         // spy servos
         wheel1 = hardwareMap.get(Servo.class, "wheel1Servo");
         wheel2 = hardwareMap.get(Servo.class, "wheel2Servo");
@@ -233,7 +243,7 @@ public class RobotOpMode extends LinearOpMode {
 //            telemetry.addData("wheel2 position", wheel2.getPosition());
 //            telemetry.addData("upAndDown position", upAndDown.getPosition());
 //            telemetry.update();
-             telemetryManager.
+            // telemetryManager.
             telemetry();
         }
 

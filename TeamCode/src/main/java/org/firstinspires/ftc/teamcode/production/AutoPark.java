@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.lib.Robot;
+import org.firstinspires.ftc.teamcode.lib.TelemetryManager;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 
@@ -24,6 +25,7 @@ public class AutoPark extends LinearOpMode {
     private Servo rotateServo;
     private Claw claw;
     private LinearSlide verticalLinearSlide = null;
+    private TelemetryManager telemetryManager;
 
 
     @Override
@@ -38,6 +40,7 @@ public class AutoPark extends LinearOpMode {
 
         DcMotor verticalLinearSlideMotor = hardwareMap.get(DcMotor.class, "vlsMotor");
         DcMotor horizontalLinearSlideMotor = hardwareMap.get(DcMotor.class, "hlsMotor");
+        telemetryManager = new TelemetryManager(telemetry);
         claw = new Claw(clawServo, rotateServo);
         Robot frobot = new Robot(this, rightBackDrive, rightFrontDrive, leftBackDrive, leftFrontDrive);
 

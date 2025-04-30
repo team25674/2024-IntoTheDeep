@@ -20,6 +20,7 @@ public class Robot {
     private Servo rotateServo;
     private Claw claw;
     private LinearSlide verticalLinearSlide = null;
+    private TelemetryManager telemetryManager;
 
 
 
@@ -38,10 +39,11 @@ public class Robot {
         this.leftFrontDrive = leftFrontDrive;
 
         DcMotor verticalLinearSlideMotor = opMode.hardwareMap.get(DcMotor.class, "vlsMotor");
-        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES, null);
+        verticalLinearSlide = new LinearSlide(verticalLinearSlideMotor, LinearSlide.POS_UPPER_BASKET_INCHES);
         rotateServo = opMode.hardwareMap.get(Servo.class, "rotateServo");
         clawServo = opMode.hardwareMap.get(Servo.class, "clawServo");
-        claw = new Claw(clawServo, rotateServo);
+        telemetryManager = new TelemetryManager(telemetry);
+        claw = new Claw(clawServo, rotateServo, );
 
         // set motor directions
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
