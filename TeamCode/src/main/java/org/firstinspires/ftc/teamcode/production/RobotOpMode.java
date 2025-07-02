@@ -9,14 +9,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.Claw;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 @TeleOp(name = "RobotOpMode", group = "Linear OpMode")
 public class RobotOpMode extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
+    private static boolean USE_WEBCAM = true;
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftFrontDrive = null;
     private DcMotor leftBackDrive = null;
@@ -31,8 +36,30 @@ public class RobotOpMode extends LinearOpMode {
     private Servo clawServo;
     private Servo rotateServo;
     private Claw claw;
+    private AprilTagProcessor aprilTag;
+    private VisionPortal visionPortal;
 
-    //buton states
+    private void intiAprilTag(){
+
+        // Create proccesor
+        aprilTag = new AprilTagProcessor.Builder().build();
+
+        VisionPortal.Builder visionPortalBuilder = new VisionPortal.Builder();
+
+        // Set the camera (webcam vs. built-in RC phone camera).
+        if (USE_WEBCAM) {
+            visionPortalBuilder.setCamera(hardwareMap.get(WebcamName.class, "Webcam jimmy"));
+        } else {
+            visionPortalBuilder.setCamera(BuiltinCameraDirection.BACK);
+        }
+
+        visionPortalBuilder.addProcessor(aprilTag);
+
+
+        visionPortal = visionPortalBuilder.build();
+    }
+
+    //button states
     boolean lastButtonY = false;
     boolean lastButtonB = false;
     boolean lastButtonA = false;
@@ -74,6 +101,7 @@ public class RobotOpMode extends LinearOpMode {
         rotateServo = hardwareMap.get(Servo.class, "rotateServo");
         clawServo = hardwareMap.get(Servo.class, "clawServo");
         claw = new Claw(clawServo, rotateServo);
+        this.intiAprilTag(); //weeeeeeeeeeeee!
 
 
 
