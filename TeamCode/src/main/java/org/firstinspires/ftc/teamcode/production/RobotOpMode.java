@@ -19,7 +19,9 @@ import org.firstinspires.ftc.teamcode.lib.mechanisms.LinearSlide;
 import org.firstinspires.ftc.teamcode.lib.mechanisms.SpyContinuous;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagGameDatabase;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+
 
 import java.util.List;
 
@@ -66,10 +68,12 @@ public class RobotOpMode extends LinearOpMode {
 
         YawPitchRollAngles cameraOrientation;
 
-        cameraOrientation = new YawPitchRollAngles( AngleUnit.DEGREES, 0, 0, CAMERA_ROLL, 0);
+        cameraOrientation = new YawPitchRollAngles(AngleUnit.DEGREES, 0, 0, -90, 0);
 
         // Create proccesor
-        aprilTag = new AprilTagProcessor.Builder().build();
+        aprilTag = new AprilTagProcessor.Builder()
+                .setTagLibrary(AprilTagGameDatabase.getCurrentGameTagLibrary())
+                .build();
 
         VisionPortal.Builder visionPortalBuilder = new VisionPortal.Builder();
 
